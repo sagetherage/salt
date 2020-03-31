@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -
 """
-Simple helper for creating cards in a GitHub Project board.
+Simple helper for creating cards in a GitHub Project board for Sage.
 """
 
 import argparse
