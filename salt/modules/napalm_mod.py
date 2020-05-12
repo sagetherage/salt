@@ -763,7 +763,7 @@ def junos_rpc(cmd=None, dest=None, format=None, **kwargs):
     .. code-block:: bash
 
         salt '*' napalm.junos_rpc get-lldp-neighbors-information
-        salt '*' napalm.junos_rcp get-config <configuration><system><ntp/></system></configuration>
+        salt '*' napalm.junos_rpc get-config <configuration><system><ntp/></system></configuration>
     """
     prep = _junos_prep_fun(napalm_device)  # pylint: disable=undefined-variable
     if not prep["result"]:
@@ -1678,7 +1678,7 @@ def config_diff_tree(
         ``running``.
 
     running_path
-        Absolute or remote path from where to load the runing configuration
+        Absolute or remote path from where to load the running configuration
         text. This argument allows any URI supported by
         :py:func:`cp.get_url <salt.modules.cp.get_url>`), e.g., ``salt://``,
         ``https://``, ``s3://``, ``ftp:/``, etc.
@@ -1742,7 +1742,7 @@ def config_diff_text(
         ``running``.
 
     running_path
-        Absolute or remote path from where to load the runing configuration
+        Absolute or remote path from where to load the running configuration
         text. This argument allows any URI supported by
         :py:func:`cp.get_url <salt.modules.cp.get_url>`), e.g., ``salt://``,
         ``https://``, ``s3://``, ``ftp:/``, etc.
