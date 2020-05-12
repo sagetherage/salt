@@ -1,4 +1,4 @@
-.. _configuration-salt-master:
+restrict.. _configuration-salt-master:
 
 ===========================
 Configuring the Salt Master
@@ -9,13 +9,18 @@ of the Salt system each have a respective configuration file. The
 ``salt-master`` is configured via the master configuration file, and the
 ``salt-minion`` is configured via the minion configuration file.
 
+.. Securing the Salt Master::
+
+  The Salt Master is the most critical piece of your Salt implementation as it has the ability to reach every part of your infrastructure. There are few scenarios where the Salt Master reasonably needs to be accessible to the internet. In those scenarios, strict firewall rules should be used. Avoid allowing large ranges in your firewall rules or use a hardened bastion server or a VPN to restrict direct access to the Salt master from the internet. 
+
+
 .. seealso::
 
     :ref:`Example master configuration file <configuration-examples-master>`.
 
 The configuration file for the salt-master is located at ``/etc/salt/master``
-by default. Atomic included configuration files can be placed in 
-``/etc/salt/master.d/*.conf``. Warning: files with other suffixes than .conf will 
+by default. Atomic included configuration files can be placed in
+``/etc/salt/master.d/*.conf``. Warning: files with other suffixes than .conf will
 not be included. A notable exception is FreeBSD, where the configuration file is
 located at ``/usr/local/etc/salt``. The available options are as follows:
 
