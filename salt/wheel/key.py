@@ -27,7 +27,6 @@ The wheel key functions can also be called via a ``salt`` command at the CLI
 using the :mod:`saltutil execution module <salt.modules.saltutil>`.
 """
 
-# Import python libs
 from __future__ import absolute_import, print_function, unicode_literals
 
 import hashlib
@@ -38,8 +37,6 @@ import salt.crypt
 import salt.utils.crypt
 import salt.utils.files
 import salt.utils.platform
-
-# Import salt libs
 from salt.key import get_key
 from salt.utils.sanitizers import clean
 
@@ -195,7 +192,7 @@ def delete_dict(match):
                 'stuart',
                 'bob',
             ],
-        })
+        }})
         {'jid': '20160826201244808521', 'tag': 'salt/wheel/20160826201244808521'}
     """
     skey = get_key(__opts__)
@@ -256,7 +253,7 @@ def reject_dict(match, include_accepted=False, include_denied=False):
                 'stuart',
                 'bob',
             ],
-        })
+        }})
         {'jid': '20160826201244808521', 'tag': 'salt/wheel/20160826201244808521'}
     """
     skey = get_key(__opts__)
@@ -283,6 +280,24 @@ def key_str(match):
     """
     skey = get_key(__opts__)
     return skey.key_str(match)
+
+
+def master_key_str():
+    r"""
+    Returns master's public key. Returns a dictionary
+
+    .. code-block:: python
+
+        >>> wheel.cmd('key.master_key_str')
+        {'local': {'master.pub': '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0B
+        ...
+        TWugEQpPt\niQIDAQAB\n-----END PUBLIC KEY-----'}}
+    """
+    keyname = "master.pub"
+    path_to_pubkey = os.path.join(__opts__["pki_dir"], keyname)
+    with salt.utils.files.fopen(path_to_pubkey, "r") as fp_:
+        keyvalue = salt.utils.stringutils.to_unicode(fp_.read())
+    return {"local": {keyname: keyvalue}}
 
 
 def finger(match, hash_type=None):
@@ -334,7 +349,7 @@ def gen(id_=None, keysize=2048):
     r"""
     Generate a key pair. No keys are stored on the master. A key pair is
     returned as a dict containing pub and priv keys. Returns a dictionary
-    containing the the ``pub`` and ``priv`` keys with their generated values.
+    containing the ``pub`` and ``priv`` keys with their generated values.
 
     id\_
         Set a name to generate a key pair for use with salt. If not specified,
